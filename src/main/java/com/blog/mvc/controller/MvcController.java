@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MvcController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
-        System.out.println("我进来了没！");
         return "helloController";
     }
 }
