@@ -11,7 +11,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <!-- 2.数据库 -->
@@ -155,6 +155,31 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
+
+        <!-- 1.日志 -->
+        <!--<!– 实现slf4j接口并整合 –>-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+
+        <!--log4j2支持-->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.logging.log4j</groupId>-->
+        <!--<artifactId>log4j-core</artifactId>-->
+        <!--<version>${org.apache.logging.log4j.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.logging.log4j</groupId>-->
+        <!--<artifactId>log4j-api</artifactId>-->
+        <!--<version>${org.apache.logging.log4j.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <!-- 配置可变版本号,也就是常说的版本管理 （Spring、SpringMvc、Mybatis、Gson、Druid） -->
@@ -172,6 +197,7 @@
         <redis.clients.version>2.7.3</redis.clients.version>
         <com.dyuproject.protostuff.version>1.0.8</com.dyuproject.protostuff.version>
         <developer.organization><![CDATA[scengine]]></developer.organization>
+        <org.slf4j.version>1.7.21</org.slf4j.version>
     </properties>
     <build>
         <finalName>BlogApplication</finalName>
@@ -180,9 +206,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.1.1</version>
-                <configuration>
-                    <webappDirectory>web</webappDirectory>
-                </configuration>
             </plugin>
         </plugins>
     </build>
