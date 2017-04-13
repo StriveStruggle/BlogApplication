@@ -17,9 +17,11 @@
     (1)加入对静态资源的处理：js,gif,png
     (2)允许使用"/"做整体映射
     -->
-    <mvc:resources mapping="/css/**" location="/static/css"/>
-    <mvc:resources mapping="/images/**" location="/static/images"/>
-    <mvc:resources mapping="/view/**" location="/static/view"/>
+    <mvc:resources mapping="/css/**" location="/static/css/"/>
+    <mvc:resources mapping="/images/**" location="/static/images/"/>
+    <mvc:resources mapping="/view/**" location="/static/view/"/>
+    <mvc:resources mapping="/js/**" location="/static/js/"/>
+    <mvc:default-servlet-handler/>
 
     <!--3配置jsp 显示ViewResolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -29,7 +31,7 @@
     </bean>
 
     <!--4.扫描web相关的bean-->
-    <context:component-scan base-package="com.blog.mvc.controller">
+    <context:component-scan base-package="com.blog.mvc">
         <!--制定扫包规则，只扫描使用@Controller注解的JAVA类-->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
