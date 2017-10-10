@@ -2,7 +2,7 @@ package com.blog.mvc.controller;
 
 import com.blog.domain.ResponseObj;
 import com.blog.domain.User;
-import com.blog.service.serviceImpl.UserServiceImpl;
+import com.blog.service.impl.UserServiceImpl;
 import com.blog.utils.GsonUtils;
 import com.blog.utils.StringUtils;
 import com.google.gson.Gson;

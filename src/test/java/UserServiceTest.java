@@ -1,7 +1,8 @@
 import com.blog.domain.User;
 import com.blog.exception.*;
 import com.blog.service.UserService;
-import com.blog.service.serviceImpl.UserServiceImpl;
+import com.blog.service.impl.UserServiceImpl;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,26 +15,26 @@ public class UserServiceTest extends BaseTest {
     @Autowired
     private UserServiceImpl userService;
 
-    //´Ë´¦Ö±½ÓÊ¹ÓÃUserServiceµÄÊµÏÖÀà£¬Ö÷ÒªÊÇ·½±ãÅ×³öÒì³££¬È»ºóÒì³£³öÏÖÊ±ºò¿ÉÒÔÕë¶ÔÐÔµÄ´¦Àí
+    //ï¿½Ë´ï¿½Ö±ï¿½ï¿½Ê¹ï¿½ï¿½UserServiceï¿½ï¿½Êµï¿½ï¿½ï¿½à£¬ï¿½ï¿½Òªï¿½Ç·ï¿½ï¿½ï¿½ï¿½×³ï¿½ï¿½ì³£ï¿½ï¿½È»ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÔµÄ´ï¿½ï¿½ï¿½
     @Test
     public void testAdd() {
         User user = new User();
         try {
             userService.add(user);
         } catch (UserCanNotBeNullException e) {
-            //ÓÃ»§²»ÄÜÎª¿ÕÒì³£Å×³ö
+            //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ì³£ï¿½×³ï¿½
             e.printStackTrace();
         } catch (UserNameCanNotBeNullException e) {
-            //ÓÃ»§Ãû²»ÄÜÎª¿Õ
+            //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
             e.printStackTrace();
         } catch (UserPwdCanNotBeNullException e) {
-            //ÓÃ»§ÃÜÂë²»ÄÜÎª¿Õ
+            //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Îªï¿½ï¿½
             e.printStackTrace();
         } catch (UserAlreadyExistException e) {
-            //ÓÃ»§´æÔÚÅ×³ö
+            //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½
             e.printStackTrace();
         } catch (OtherThingsException e) {
-            //ÆäËû×ÛºÏÒì³£»òÊÇ²»ÄÜ´¦ÀíµÄÒì³£
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ûºï¿½ï¿½ì³£ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ì³£
             e.printStackTrace();
         }
     }

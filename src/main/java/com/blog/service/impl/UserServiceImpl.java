@@ -1,4 +1,4 @@
-package com.blog.service.serviceImpl;
+package com.blog.service.impl;
 
 import com.blog.dao.UserDAO;
 import com.blog.domain.User;
@@ -20,47 +20,47 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     /**
-     * Ìí¼ÓÓÃ»§£¬Ò»°ãÀ´ËµÐèÒª¼ì²éÓÃ»§Îª¿Õ£¬ÓÃ»§ÃûÎª¿Õ£¬ÃÜÂëÎª¿Õ
+     * ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ã»ï¿½Îªï¿½Õ£ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
      *
      * @param user
      * @throws UserCanNotBeNullException
      * @throws UserNameCanNotBeNullException
      */
     public void add(User user) throws UserCanNotBeNullException, UserNameCanNotBeNullException, UserPwdCanNotBeNullException, OtherThingsException, UserAlreadyExistException {
-        //ÏÈ¼ì²éÓÃ»§ÊÇ·ñ´æÔÚ
+        //ï¿½È¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
         if (null == user) {
             throw new UserCanNotBeNullException("User can not be Null");
         }
-        //ÓÃ»§Ãû²»ÄÜÎª¿Õ¼ì²é
+        //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ¼ï¿½ï¿½
         if (StringUtils.isEmpty(user.getLoginId())) {
-            //Å×³öÓÃ»§ÃûÎª¿ÕµÄ×Ô¶¨ÒåÒì³£
+            //ï¿½×³ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Îªï¿½Õµï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ì³£
             throw new UserNameCanNotBeNullException("User name can not be Null");
         }
-        //ÓÃ»§ÃÜÂë²»ÄÜÎª¿Õ¼ì²é
+        //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Îªï¿½Õ¼ï¿½ï¿½
         if (StringUtils.isEmpty(user.getPwd())) {
             throw new UserPwdCanNotBeNullException("User password can not be Null");
         }
-        //ÓÉÓÚÎÒÕâ¸öÊÇ²Ö¿â¹ÜÀíÏµÍ³£¬¸ù¾ÝÒµÎñÐèÇóÀ´Ëµ£¬ÎÒÃÇµÄÓÃ»§»ù±¾ÐÅÏ¢¶¼ÊÇ²»ÄÜÎª¿ÕµÄ
-        //»ù±¾ÐÅÏ¢°üÀ¨£ºÐÕÃû¡¢ÄêÁä¡¢ÓÃ»§Ãû¡¢ÃÜÂë¡¢ÐÔ±ð¡¢ÊÖ»úºÅ¡¢ÄêÁä´óÓÚ18
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²Ö¿ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Îªï¿½Õµï¿½
+        //ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä¡¢ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡¢ï¿½Ô±ï¿½ï¿½Ö»ï¿½Å¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½18
         if (StringUtils.isEmpty(user.getDuty()) || StringUtils.isEmpty(user.getSex()) || (user.getAge() > 18) || StringUtils.isEmpty(user.getCellNumber())) {
             throw new OtherThingsException("Some Users' base info can not be null");
         }
         //TODO
-        //´ýÐÞ¸Ä----ÐÞ¸Ä²»´æÔÚÏàÍ¬ÓÃ»§ÃûµÄ²ÅÄÜ×¢²á£¬¼´½«²ÎÊýloginId¸ÄÎªuserName
-        //ÒÑ¾­´æÔÚÏàÍ¬µÄÓÃ»§
+        //ï¿½ï¿½ï¿½Þ¸ï¿½----ï¿½Þ¸Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½Ã»ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½loginIdï¿½ï¿½ÎªuserName
+        //ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ã»ï¿½
         if (null != userDAO.findOneById(user.getLoginId())) {
             throw new UserAlreadyExistException("Register User Failed,Because the user Already exist");
         }
-        int result = 0;//ÊÜÓ°ÏìµÄÐÐÊýÄ¬ÈÏÎª0
+        int result = 0;//ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îª0
         try {
             result = userDAO.add(user);
         } catch (Exception e) {
-            System.out.println("Ìí¼ÓÓÃ»§Ê§°Ü£¬ÓÃ»§ÒÑ¾­´æÔÚ");
-            //ÆäËûÓÃ»§Ìí¼ÓÊ§°ÜÒì³£
+            System.out.println("ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ê§ï¿½Ü£ï¿½ï¿½Ã»ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½");
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ì³£
             throw new OtherThingsException(e);
         }
         if (result > 0) {
-            System.out.println("Ìí¼ÓÓÃ»§³É¹¦");
+            System.out.println("ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½É¹ï¿½");
         }
     }
 
